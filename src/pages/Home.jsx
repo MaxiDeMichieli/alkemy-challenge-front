@@ -1,51 +1,57 @@
-import { useState } from 'react';
 import Header from '../components/Header/Header';
-import { Grid, Container, Typography, Hidden } from '@material-ui/core';
+import { Grid, Container, Typography, Button, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import homeImg from '../images/homeImage.svg';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex'
+    display: 'flex',
+    minHeight: '100vh'
   },
-  div: {
-    heigth: '500px',
+  imgContainer: {
+    minWidth: 310,
   },
   img: {
     width: '100%'
   },
-  toolbar: theme.mixins.toolbar
+  toolbar: theme.mixins.toolbar,
+  content: {
+    marginTop: 60
+  },
+  btnContainer: {
+    display: 'flex',
+    justifyContent: 'center'
+  },
 }));
 
 function Home() {
   const classes = useStyles();
-  const [open, setOpen]  = useState(false);
-
-  const actionOpen = () => {
-    setOpen(!open)
-  }
 
   return (
     <div className={classes.root}>
-      <Header menu={false} />
+      <Header menu={true} />
       <div>
         <div className={classes.toolbar}></div>
-        <Container>
-        <Grid container spacing={3} className={classes.toolbar} >
-          <Grid item xs={12} className={classes.div}>
-            <Hidden xsDown>
-              <Typography variant="h2" >
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae eius delectus enim sed dignissimos tempore veniam dolor beatae officia quidem.
+        <Container className={classes.content}>
+          <Grid container spacing={3} className={classes.toolbar} justify="center" alignItems="center" >
+            <Grid item xs={8} sm={6} className={classes.imgContainer}>
+              <img src={homeImg} alt="home-img" className={classes.img} />
+            </Grid>
+            <Grid item xs={12} sm={6} className={classes.div} justify="center" >
+              <Typography
+                variant="h4"
+                component="h1"
+                align="center"
+                color="textPrimary"
+              >
+                Controla tus ingresos y egresos de dinero!
               </Typography>
-            </Hidden>
+              <Box mt={3} className={classes.btnContainer} >
+                <Button variant="contained" color="secondary" >Comienza ahora!</Button>
+              </Box>
+            </Grid>
           </Grid>
-          <Grid item xs={12} sm={8} lg={6} className={classes.div}>
-            <img src={homeImg} alt="home-img" className={classes.img} />
-          </Grid>
-          <Grid item xs={6} className={classes.div}>
-          </Grid>
-        </Grid>
-      </Container>
+        </Container>
       </div>
     </div>
   );
