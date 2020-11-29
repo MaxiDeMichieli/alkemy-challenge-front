@@ -3,6 +3,7 @@ import { AppBar, Toolbar, Button, IconButton, Box, Container } from '@material-u
 import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
 import logo from '../../images/alkLogo.svg';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -41,12 +42,16 @@ function Header(props) {
   let signBtns;
   if (!props.menu) {
     signBtns = <Fragment>
-      <Box mr={1}>
-        <Button color="inherit" href="/signin">Sign in</Button>
-      </Box>
-      <Box>
-        <Button color="inherit" variant="outlined">Sign up</Button>
-      </Box>
+      <Link to="/signin">
+        <Box mr={1}>
+          <Button color="inherit" href="/signin">Sign in</Button>
+        </Box>
+      </Link>
+      <Link to="/signup">
+        <Box>
+          <Button color="inherit" variant="outlined">Sign up</Button>
+        </Box>
+      </Link>
     </Fragment>
   }
 
@@ -56,7 +61,9 @@ function Header(props) {
         <Toolbar>
           {menu}
           <div className={classes.logo}>
-            <img src={logo} alt="logo-alk" />
+            <Link to="/">
+              <img src={logo} alt="logo-alk" />
+            </Link>
           </div>
           {signBtns}
         </Toolbar>

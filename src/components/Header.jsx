@@ -1,6 +1,6 @@
 import { useState, Fragment } from 'react';
-import Navbar from './Navbar';
-import Drawer from './Drawer';
+import Navbar from './Header/Navbar';
+import Drawer from './Header/Drawer';
 import { Hidden } from '@material-ui/core';
 
 function Header(props) {

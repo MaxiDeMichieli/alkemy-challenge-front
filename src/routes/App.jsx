@@ -11,7 +11,10 @@ function App() {
       <ThemeProvider theme={theme}>
         <Switch>
           <Route path="/signin" exact>
-            <Sign />
+            <Sign type={0} />
+          </Route>
+          <Route path="/signup" exact>
+            <Sign type={1} />
           </Route>
           <Route path="/" exact>
             <Home />

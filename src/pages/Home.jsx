@@ -1,7 +1,8 @@
-import Header from '../components/Header/Header';
+import Header from '../components/Header';
 import { Grid, Container, Typography, Button, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import homeImg from '../images/homeImage.svg';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,7 +30,7 @@ function Home() {
 
   return (
     <div className={classes.root}>
-      <Header menu={true} />
+      <Header menu={false} />
       <div>
         <div className={classes.toolbar}></div>
         <Container className={classes.content}>
@@ -47,7 +48,9 @@ function Home() {
                 Controla tus ingresos y egresos de dinero!
               </Typography>
               <Box mt={3} className={classes.btnContainer} >
-                <Button variant="contained" color="secondary" >Comienza ahora!</Button>
+                <Link to="/signup">
+                  <Button variant="contained" color="secondary" >Comienza ahora!</Button>
+                </Link>
               </Box>
             </Grid>
           </Grid>
