@@ -3,6 +3,8 @@ import theme from '../theme';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import Sign from '../pages/Sign';
+import NewOperation from '../pages/NewOperation';
+import Dashboard from '../pages/Dashboard';
 
 
 function App() {
@@ -10,6 +12,12 @@ function App() {
     <Router>
       <ThemeProvider theme={theme}>
         <Switch>
+          <Route path="/dashboard">
+            <Dashboard />
+          </Route>
+          <Route path="/new-operation">
+            <NewOperation />
+          </Route>
           <Route path="/signin" exact>
             <Sign type={0} />
           </Route>

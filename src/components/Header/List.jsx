@@ -1,42 +1,43 @@
-import { List, ListItem, ListItemIcon, ListItemText, Divider } from "@material-ui/core";
+import { List, Divider } from "@material-ui/core";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import AttachMoneyRoundedIcon from '@material-ui/icons/AttachMoneyRounded';
 import MoneyOffRoundedIcon from '@material-ui/icons/MoneyOffRounded';
 import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
+import MyListItem from './ListImes';
 
-const ListaMUI = () => {
+const MyList = () => {
   return (
     <div>
       <List component="nav" aria-label="cicle">
-        <ListItem button>
-          <ListItemIcon>
-            <AccountCircleIcon />
-          </ListItemIcon>
-          <ListItemText primary="Maximo De Michieli" />
-        </ListItem>
+        <MyListItem
+          link="/account"
+          text="Maximo De Michieli"
+        >
+          <AccountCircleIcon />
+        </MyListItem>
         <Divider />
-        <ListItem button>
-          <ListItemIcon>
-            <AttachMoneyRoundedIcon />
-          </ListItemIcon>
-          <ListItemText primary="Ingresos" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <MoneyOffRoundedIcon />
-          </ListItemIcon>
-          <ListItemText primary="Egresos" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <AddCircleOutlineRoundedIcon />
-          </ListItemIcon>
-          <ListItemText primary="Nueva operación" />
-        </ListItem>
+        <MyListItem
+          link="/income"
+          text="Ingresos"
+        >
+          <AttachMoneyRoundedIcon />
+        </MyListItem>
+        <MyListItem
+          link="/expenses"
+          text="Egresos"
+        >
+          <MoneyOffRoundedIcon />
+        </MyListItem>
+        <MyListItem
+          link="/new-operation"
+          text="Nueva operación"
+        >
+          <AddCircleOutlineRoundedIcon />
+        </MyListItem>
       </List>
       <Divider />
     </div>
   );
 };
 
-export default ListaMUI;
+export default MyList;
