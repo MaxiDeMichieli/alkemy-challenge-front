@@ -1,7 +1,8 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Card, AppBar, Tabs, Tab, Typography, Box } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import SwipeableViews from 'react-swipeable-views';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { AppBar, Tabs, Tab, Typography, Box, Card } from '@material-ui/core';
 import Signin from './Form/Signin';
 import Signup from './Form/Signup';
 
@@ -27,13 +28,12 @@ const useStyles = makeStyles(theme => ({
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
       hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
+      id={`full-width-tabpanel-${index}`}
+      aria-labelledby={`full-width-tab-${index}`}
       {...other}
     >
       {value === index && (
@@ -53,17 +53,22 @@ TabPanel.propTypes = {
 
 function a11yProps(index) {
   return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    id: `full-width-tab-${index}`,
+    'aria-controls': `full-width-tabpanel-${index}`,
   };
 }
 
 const Form = (props) => {
   const classes = useStyles();
+  const theme = useTheme();
   const [value, setValue] = React.useState(props.type);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const handleChangeIndex = (index) => {
+    setValue(index);
   };
 
   return (
@@ -82,17 +87,23 @@ const Form = (props) => {
                 <Tab label="Registrate" {...a11yProps(1)} />
               </Tabs>
             </AppBar>
-            <TabPanel value={value} index={0}>
-              <Signin />
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-              <Signup />
-            </TabPanel>
+            <SwipeableViews
+              axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+              index={value}
+              onChangeIndex={handleChangeIndex}
+            >
+              <TabPanel value={value} index={0} dir={theme.direction}>
+                <Signin />
+              </TabPanel>
+              <TabPanel value={value} index={1} dir={theme.direction}>
+                <Signup />
+              </TabPanel>
+            </SwipeableViews>
           </div>
         </Card>
       </div>
     </div>
-  )
+  );
 }
 
 export default Form
