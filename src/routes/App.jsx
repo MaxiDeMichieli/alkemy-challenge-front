@@ -8,6 +8,8 @@ import Dashboard from '../pages/Dashboard';
 import Operations from '../pages/Operations';
 import Edit from '../pages/Edit';
 import ActivateAccount from '../pages/ActivateAccount';
+import ResetPassword from '../pages/ResetPassword';
+import ForgotPassword from '../pages/ForgotPassword';
 import PrivateRoutes from './PrivateRoutes';
 import PublicRoutes from './PublicRoutes';
 
@@ -34,6 +36,12 @@ function App() {
           </Route>
           <Route path="/new-operation" exact>
             <PrivateRoutes component={<NewOperation />} />
+          </Route>
+          <Route path="/forgotpassword" exact>
+            <PublicRoutes component={<ForgotPassword />} />
+          </Route>
+          <Route path="/resetpassword/:resetLink" exact>
+            <PublicRoutes component={<ResetPassword />} />
           </Route>
           <Route path="/signin" exact>
             <PublicRoutes component={<Sign type={0} />} />

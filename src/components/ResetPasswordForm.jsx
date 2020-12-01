@@ -1,34 +1,37 @@
-import { useState, Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Button, Box, LinearProgress, Typography } from '@material-ui/core';
+import { Grid, Button, Box, LinearProgress } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 import { TextField } from 'formik-material-ui';
-import { Redirect, Link } from 'react-router-dom';
-import axios from '../../axios/axios';
+import { Redirect } from 'react-router-dom';
+import axios from '../axios/axios';
 import qs from 'querystring';
+
 
 const useStyles = makeStyles(theme => ({
   textField: {
-    width: '100%'
+    width: '100%',
+    margin: 0
   }
 }));
 
-
-const Signin = () => {
+function ResetPasswordForm(props) {
   const classes = useStyles();
+
+  const { resetLink } = props
 
   const [redirect, setRedirect] = useState(<Fragment />)
 
   const sendData = (values, callback) => {
     let api = axios();
-    api.post('/users/login', qs.stringify(values))
+    values.resetLink = resetLink
+    api.patch('/users/reset-password', qs.stringify(values))
       .then(({ data }) => {
         callback(false)
         if (data.error != null) {
           window.location.reload()
         } else {
-          localStorage.setItem('auth', data.token)
-          setRedirect(<Redirect to="/dashboard" />)
+          setRedirect(<Redirect to="/signin" />)
         }
       })
       .catch(err => {
@@ -42,22 +45,23 @@ const Signin = () => {
       {redirect}
       <Formik
         initialValues={{
-          email: '',
           password: '',
+          passwordRepeat: '',
         }}
         validate={values => {
           const errors = {};
-          if (!values.email) {
-            errors.email = 'Debes ingresar un email';
-          } else if (
-            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-          ) {
-            errors.email = 'Ingresa un email válido';
-          }
-
           if (!values.password) {
             errors.password = 'Debes ingresar una contraseña';
+          } else if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/.test(values.password)) {
+            errors.password = 'La contraseña debe tener: al menos 6 caracteres, una mayúscula, una minúscula y un número'
           }
+      
+          if (!values.passwordRepeat) {
+            errors.passwordRepeat = 'Debes repetir tu contraseña';
+          } else if (values.passwordRepeat !== values.password) {
+            errors.passwordRepeat = 'Las contraseñas no coinciden'
+          }
+      
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
@@ -71,9 +75,9 @@ const Signin = () => {
                 <Field
                   className={classes.textField}
                   component={TextField}
-                  name="email"
-                  type="email"
-                  label="Email*"
+                  type="password"
+                  name="password"
+                  label="Nueva contraseña*"
                   color="secondary"
                 />
               </Grid>
@@ -82,17 +86,12 @@ const Signin = () => {
                   className={classes.textField}
                   component={TextField}
                   type="password"
-                  label="Contraseña*"
-                  name="password"
+                  name="passwordRepeat"
+                  label="Repite la contraseña*"
                   color="secondary"
                 />
               </Grid>
               {isSubmitting && <LinearProgress />}
-              <Link to="/forgotpassword">
-                <Typography variant="caption">
-                  Olvidaste tu contraseña?
-                </Typography>
-              </Link>
               <Grid item xs={12}>
                 <Box mt={2}>
                   <Button
@@ -103,7 +102,7 @@ const Signin = () => {
                     disabled={isSubmitting}
                     onClick={submitForm}
                   >
-                    iniciar sesión
+                    Confirmar contraseña
                 </Button>
                 </Box>
               </Grid>
@@ -112,7 +111,7 @@ const Signin = () => {
         )}
       </Formik>
     </Fragment>
-  )
+  );
 }
 
-export default Signin
+export default ResetPasswordForm;
