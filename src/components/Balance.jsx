@@ -61,7 +61,7 @@ function Balance() {
           </Card>
         </Grid>
         <Grid item xs={12} sm={8} >
-          <OperationList />
+          <OperationList url="/operations/list?limit=10&offset=0" />
         </Grid>
       </Grid>
     </Container>

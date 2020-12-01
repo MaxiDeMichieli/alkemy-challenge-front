@@ -16,12 +16,12 @@ const MyListItem = (props) => {
   let btns;
   if (props.btns) {
     btns = <Fragment>
-      <IconButton edge="end" aria-label="comments">
-        <Link to="/edit/1">
+      <IconButton edge="end" aria-label="edit">
+        <Link to={props.link}>
           <EditIcon />
         </Link>
       </IconButton>
-      <IconButton edge="end" aria-label="comments">
+      <IconButton edge="end" aria-label="delete">
         <DeleteIcon />
       </IconButton>
     </Fragment>
