@@ -3,7 +3,8 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import AttachMoneyRoundedIcon from '@material-ui/icons/AttachMoneyRounded';
 import MoneyOffRoundedIcon from '@material-ui/icons/MoneyOffRounded';
 import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
-import MyListItem from './ListImes';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import MyListItem from './ListItem';
 
 const MyList = () => {
   return (
@@ -16,6 +17,12 @@ const MyList = () => {
           <AccountCircleIcon />
         </MyListItem>
         <Divider />
+        <MyListItem
+          link="/dashboard"
+          text="Dashboard"
+        >
+          <DashboardIcon />
+        </MyListItem>
         <MyListItem
           link="/income"
           text="Ingresos"
