@@ -11,14 +11,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function OperationsList() {
+function OperationsList(props) {
   const classes = useStyles();
 
   return (
     <Card className={classes.card} >
       <Box my={1}>
         <Typography color="textSecondary" variant="h5" align="center" >
-          Ultimas operaciones
+          {props.title || 'Últimas operaciones'}
         </Typography>
       </Box>
       <Divider />

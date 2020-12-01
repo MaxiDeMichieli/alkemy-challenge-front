@@ -5,6 +5,7 @@ import Home from '../pages/Home';
 import Sign from '../pages/Sign';
 import NewOperation from '../pages/NewOperation';
 import Dashboard from '../pages/Dashboard';
+import Operations from '../pages/Operations';
 
 
 function App() {
@@ -12,6 +13,12 @@ function App() {
     <Router>
       <ThemeProvider theme={theme}>
         <Switch>
+          <Route path="/income">
+            <Operations title={'Últimos ingresos'} />
+          </Route>
+          <Route path="/expenses">
+            <Operations title={'Últimos egresos'} />
+          </Route>
           <Route path="/dashboard">
             <Dashboard />
           </Route>
