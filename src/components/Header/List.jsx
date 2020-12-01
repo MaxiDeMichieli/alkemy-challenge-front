@@ -3,6 +3,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import AttachMoneyRoundedIcon from '@material-ui/icons/AttachMoneyRounded';
 import MoneyOffRoundedIcon from '@material-ui/icons/MoneyOffRounded';
 import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import MyListItem from './ListItem';
 
@@ -11,7 +12,7 @@ const MyList = () => {
     <div>
       <List component="nav" aria-label="cicle">
         <MyListItem
-          link="/account"
+          link="/dashboard"
           text="Maximo De Michieli"
         >
           <AccountCircleIcon />
@@ -40,6 +41,13 @@ const MyList = () => {
           text="Nueva operación"
         >
           <AddCircleOutlineRoundedIcon />
+        </MyListItem>
+        <Divider />
+        <MyListItem
+          link="/logout"
+          text="Cerrar sesión"
+        >
+          <ExitToAppIcon />
         </MyListItem>
       </List>
       <Divider />
