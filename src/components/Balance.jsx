@@ -1,9 +1,11 @@
+import { useEffect, useState } from 'react';
 import { Grid, Container, Card, Typography, Divider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import MyListItem from './OperationItem';
 import OperationList from './OperationsList';
+import axios from '../axios/axios';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -14,6 +16,21 @@ const useStyles = makeStyles((theme) => ({
 
 function Balance() {
   const classes = useStyles();
+
+  const [balance, setBalance] = useState({})
+
+  useEffect(() => {
+    let api = axios();
+    api.get('/operations/balance')
+      .then(({ data }) => {
+        if (data.error == null) {
+          setBalance(data)
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
 
   return (
     <Container>
@@ -28,7 +45,7 @@ function Balance() {
               }
               secondaryText={
                 <Typography color="textSecondary" variant="h6" >
-                  + $2000
+                  $ {balance.balance}
                 </Typography>
               }
             />
@@ -36,12 +53,12 @@ function Balance() {
             <MyListItem
               text={
                 <Typography color="textSecondary" variant="subtitle1" >
-                  Ingresos: 13
+                  Ingresos: {balance.incomes}
                 </Typography>
               }
               secondaryText={
                 <Typography color="textSecondary" variant="h6" >
-                  <ArrowDropUpIcon /> $4300
+                  <ArrowDropUpIcon /> ${balance.incomesBalance}
                 </Typography>
               }
             />
@@ -49,12 +66,12 @@ function Balance() {
             <MyListItem
               text={
                 <Typography color="textSecondary" variant="subtitle1" >
-                  Egresos: 8
+                  Egresos: {balance.expenses}
                 </Typography>
               }
               secondaryText={
                 <Typography color="textSecondary" variant="h6" >
-                  <ArrowDropDownIcon /> $2300
+                  <ArrowDropDownIcon /> ${balance.expensesBalance}
                 </Typography>
               }
             />
