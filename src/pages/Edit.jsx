@@ -1,7 +1,7 @@
 import Header from '../components/Header';
 import { Container, Card, Typography, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import OperationForm from '../components/OperationForm';
+import OperationFormEdit from '../components/OperationFormEdit';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function NewOperation() {
+function Edit() {
   const classes = useStyles();
 
   return (
@@ -37,11 +37,11 @@ function NewOperation() {
         <Container className={classes.container}>
           <Box mb={4}>
             <Typography variant="h3" align="center" color="secondary">
-              Agrega una operación
+              Edita la operación
             </Typography>
           </Box>
           <Card className={classes.card}>
-            <OperationForm />
+            <OperationFormEdit />
           </Card>
         </Container>
       </div>
@@ -49,4 +49,4 @@ function NewOperation() {
   );
 }
 
-export default NewOperation;
+export default Edit;

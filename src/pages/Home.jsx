@@ -34,11 +34,11 @@ function Home() {
       <div>
         <div className={classes.toolbar}></div>
         <Container className={classes.content}>
-          <Grid container spacing={3} className={classes.toolbar} justify="center" alignItems="center" >
+          <Grid container spacing={3} className={classes.toolbar} alignItems="center" >
             <Grid item xs={8} sm={6} className={classes.imgContainer}>
               <img src={homeImg} alt="home-img" className={classes.img} />
             </Grid>
-            <Grid item xs={12} sm={6} className={classes.div} justify="center" >
+            <Grid item xs={12} sm={6} className={classes.div} >
               <Typography
                 variant="h4"
                 component="h1"

@@ -10,7 +10,8 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbar: theme.mixins.toolbar,
   content: {
-    marginTop: 30
+    marginTop: 30,
+    maxWidth: 800
   },
   width: {
     width: '100%'
@@ -30,8 +31,8 @@ function Operations(props) {
       <div className={classes.width} >
         <div className={classes.toolbar}></div>
         <Container className={classes.content}>
-          <Grid container spacing={3} className={classes.toolbar} justify="center" alignItems="center" >
-            <Grid item xs={12} className={classes.grid} >
+          <Grid container spacing={3} justify="center" alignItems="center" >
+            <Grid item xs={12} >
               <OperationsList title={props.title} />
             </Grid>
           </Grid>

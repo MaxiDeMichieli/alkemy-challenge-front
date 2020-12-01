@@ -1,7 +1,8 @@
 import { Fragment } from 'react';
-import { ListItem, ListItemIcon, ListItemText, IconButton, Box } from "@material-ui/core";
+import { ListItem, ListItemIcon, ListItemText, IconButton } from "@material-ui/core";
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { Link } from 'react-router-dom';
 
 const MyListItem = (props) => {
 
@@ -16,7 +17,9 @@ const MyListItem = (props) => {
   if (props.btns) {
     btns = <Fragment>
       <IconButton edge="end" aria-label="comments">
-        <EditIcon />
+        <Link to="/edit/1">
+          <EditIcon />
+        </Link>
       </IconButton>
       <IconButton edge="end" aria-label="comments">
         <DeleteIcon />

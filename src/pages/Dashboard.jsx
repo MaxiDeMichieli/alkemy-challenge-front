@@ -30,7 +30,7 @@ function Dashboard() {
       <div className={classes.width} >
         <div className={classes.toolbar}></div>
         <Container className={classes.content}>
-          <Grid container spacing={3} className={classes.toolbar} justify="center" alignItems="center" >
+          <Grid container spacing={3} className={classes.toolbar} alignItems="center" >
             <Grid item xs={12} className={classes.grid} >
               <Balance />
             </Grid>
