@@ -7,6 +7,7 @@ import NewOperation from '../pages/NewOperation';
 import Dashboard from '../pages/Dashboard';
 import Operations from '../pages/Operations';
 import Edit from '../pages/Edit';
+import ActivateAccount from '../pages/ActivateAccount';
 import PrivateRoutes from './PrivateRoutes';
 import PublicRoutes from './PublicRoutes';
 
@@ -16,6 +17,9 @@ function App() {
     <Router>
       <ThemeProvider theme={theme}>
         <Switch>
+          <Route path="/authentication/activate/:token" >
+            <ActivateAccount />
+          </Route>
           <Route path="/edit/:id" exact>
             <PrivateRoutes component={<Edit />} />
           </Route>
