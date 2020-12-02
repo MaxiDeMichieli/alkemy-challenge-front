@@ -3,12 +3,13 @@ import { useAuthentication } from '../hooks/useAuthentication';
 import { Redirect } from 'react-router-dom';
 
 function PrivateRoutes(props) {
+  const [auth] = useAuthentication();
 
   useEffect(() => {
     let component = props.component;
     let redirect = <Redirect to="/dashboard" />
 
-    useAuthentication()
+    auth
     .then(res => {
       if (res) {
         setResult(redirect)
@@ -17,7 +18,7 @@ function PrivateRoutes(props) {
       }
     })
     .catch(err => setResult(component))
-  }, [props.component])
+  }, [props.component]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const [result, setResult] = useState()
 
