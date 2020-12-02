@@ -33,7 +33,7 @@ function OperationsList(props) {
       .catch(err => {
         console.log(err)
       })
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [props]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const deleteOperation = (id) => {
     http.delete(`/operations/delete/${id}`)
