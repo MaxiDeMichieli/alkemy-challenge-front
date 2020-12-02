@@ -4,8 +4,9 @@ import { Container, Card, Typography, Box, Grid, Button, LinearProgress, Dialog,
 import { makeStyles } from '@material-ui/core/styles';
 import { Formik, Form, Field } from 'formik';
 import { TextField } from 'formik-material-ui';
-import axios from '../axios/axios';
+import { useHttp } from '../hooks/useHttp';
 import qs from 'querystring';
+import _ from 'lodash';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -40,9 +41,12 @@ const useStyles = makeStyles((theme) => ({
 function ResetPassword() {
   const classes = useStyles();
 
+  const [http] = useHttp();
+
+  const debounce = _.debounce((a, b, callback) => callback(a, b), 100);
+
   const sendData = (values, callback) => {
-    let api = axios();
-    api.patch('/users/forgot-password', qs.stringify(values))
+    http.patch('/users/forgot-password', qs.stringify(values))
       .then(({ data }) => {
         callback(false)
         if (data.error != null) {
@@ -117,7 +121,7 @@ function ResetPassword() {
                 return errors;
               }}
               onSubmit={(values, { setSubmitting }) => {
-                sendData(values, setSubmitting)
+                debounce(values, setSubmitting, sendData)
               }}
             >
               {({ submitForm, isSubmitting }) => (

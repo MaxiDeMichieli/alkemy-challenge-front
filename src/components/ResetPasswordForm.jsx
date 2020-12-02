@@ -4,8 +4,9 @@ import { Grid, Button, Box, LinearProgress } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { Redirect } from 'react-router-dom';
-import axios from '../axios/axios';
+import { useHttp } from '../hooks/useHttp';
 import qs from 'querystring';
+import _ from 'lodash';
 
 
 const useStyles = makeStyles(theme => ({
@@ -22,10 +23,13 @@ function ResetPasswordForm(props) {
 
   const [redirect, setRedirect] = useState(<Fragment />)
 
+  const [http] = useHttp();
+
+  const debounce = _.debounce((a, b, callback) => callback(a, b), 100);
+
   const sendData = (values, callback) => {
-    let api = axios();
     values.resetLink = resetLink
-    api.patch('/users/reset-password', qs.stringify(values))
+    http.patch('/users/reset-password', qs.stringify(values))
       .then(({ data }) => {
         callback(false)
         if (data.error != null) {
@@ -65,7 +69,7 @@ function ResetPasswordForm(props) {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          sendData(values, setSubmitting)
+          debounce(values, setSubmitting, sendData)
         }}
       >
         {({ submitForm, isSubmitting }) => (

@@ -3,8 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Button, Box, LinearProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 import { TextField } from 'formik-material-ui';
-import axios from '../../axios/axios';
+import { useHttp } from '../../hooks/useHttp';
 import qs from 'querystring';
+import _ from 'lodash' ;
 
 const useStyles = makeStyles(theme => ({
   textField: {
@@ -29,9 +30,12 @@ const Signup = () => {
     setOpen(false);
   };
 
+  const [http] = useHttp();
+
+  const debounce = _.debounce((a, b, callback) => callback(a, b), 100);
+
   const sendData = (values, callback) => {
-    let api = axios();
-    api.post('/users/signup', qs.stringify(values))
+    http.post('/users/signup', qs.stringify(values))
       .then(({ data }) => {
         callback(false)
         if (data.error != null) {
@@ -109,7 +113,7 @@ const Signup = () => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          sendData(values, setSubmitting)
+          debounce(values, setSubmitting, sendData)
         }}
       >
         {({ submitForm, isSubmitting }) => (

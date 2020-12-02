@@ -1,5 +1,5 @@
 import { useEffect, Fragment, useState } from 'react';
-import isAuthenticated from '../auth/authentication';
+import { useAuthentication } from '../hooks/useAuthentication';
 import { Redirect } from 'react-router-dom';
 
 function PrivateRoutes(props) {
@@ -8,7 +8,7 @@ function PrivateRoutes(props) {
     let component = props.component;
     let redirect = <Redirect to="/signin" />
 
-    isAuthenticated()
+    useAuthentication()
     .then(res => {
       if (res) {
         setResult(component)

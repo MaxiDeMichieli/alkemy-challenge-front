@@ -7,9 +7,9 @@ import { format } from 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import { Redirect } from 'react-router-dom';
-import axios from '../axios/axios';
 import qs from 'querystring';
 import _ from 'lodash';
+import { useHttp } from '../hooks/useHttp';
 
 const useStyles = makeStyles(theme => ({
   textField: {
@@ -33,12 +33,12 @@ function OperationForm() {
 
   const [redirect, setRedirect] = useState(<Fragment />)
 
-  const delay = _.debounce((values, callback) => sendData(values, callback), 100);
+  const debounce = _.debounce((a, b, callback) => callback(a, b), 100);
+
+  const [http] = useHttp();
 
   const sendData = (values, callback) => {
-    console.log(values)
-    let api = axios();
-    api.post('/operations/create', qs.stringify(values))
+    http.post('/operations/create', qs.stringify(values))
       .then(({ data }) => {
         callback(false)
         if (data.error != null) {
@@ -115,7 +115,7 @@ function OperationForm() {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          delay(values, setSubmitting)
+          debounce(values, setSubmitting, sendData)
         }}
       >
         {({ submitForm, isSubmitting }) => (

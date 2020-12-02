@@ -1,7 +1,7 @@
 import axios from 'axios';
-let localToken = localStorage.getItem('auth');
 
-const api = (token) => {
+export const useHttp = (token) => {
+  let localToken = localStorage.getItem('auth');
   let config;
   const url = 'http://localhost:3001/api'
   if (token || localToken) {
@@ -21,7 +21,5 @@ const api = (token) => {
     }
   }
 
-  return axios.create(config);
+  return [axios.create(config)]
 }
-
-export default api

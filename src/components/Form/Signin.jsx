@@ -4,8 +4,9 @@ import { Grid, Button, Box, LinearProgress, Typography } from '@material-ui/core
 import { Formik, Form, Field } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { Redirect, Link } from 'react-router-dom';
-import axios from '../../axios/axios';
+import { useHttp } from '../../hooks/useHttp';
 import qs from 'querystring';
+import _ from 'lodash';
 
 const useStyles = makeStyles(theme => ({
   textField: {
@@ -19,9 +20,12 @@ const Signin = () => {
 
   const [redirect, setRedirect] = useState(<Fragment />)
 
+  const [http] = useHttp();
+
+  const debounce = _.debounce((a, b, callback) => callback(a, b), 100);
+
   const sendData = (values, callback) => {
-    let api = axios();
-    api.post('/users/login', qs.stringify(values))
+    http.post('/users/login', qs.stringify(values))
       .then(({ data }) => {
         callback(false)
         if (data.error != null) {
@@ -61,7 +65,7 @@ const Signin = () => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          sendData(values, setSubmitting)
+          debounce(values, setSubmitting, sendData)
         }}
       >
         {({ submitForm, isSubmitting }) => (

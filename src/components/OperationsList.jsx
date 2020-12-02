@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import OperationItem from './OperationItem';
-import axios from '../axios/axios';
+import { useHttp } from '../hooks/useHttp';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -21,9 +21,10 @@ function OperationsList(props) {
 
   const [operations, setOperations] = useState([])
 
+  const [http] = useHttp()
+
   useEffect(() => {
-    let api = axios();
-    api.get(props.url)
+    http.get(props.url)
       .then(({ data }) => {
         if (data.error == null) {
           setOperations(data.operations)
@@ -32,11 +33,10 @@ function OperationsList(props) {
       .catch(err => {
         console.log(err)
       })
-  }, [props])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const deleteOperation = (id) => {
-    let api = axios();
-    api.delete(`/operations/delete/${id}`)
+    http.delete(`/operations/delete/${id}`)
       .then(({ data }) => {
         if (data.error == null) {
           let operationsFilter = operations.filter(op => {
@@ -99,7 +99,7 @@ function OperationsList(props) {
         </Box>
         {
           operations.map(op => (
-            <Fragment>
+            <Fragment key={op.id} >
               <Divider />
               <OperationItem
                 delete={() => handleClickOpen(op.id)}

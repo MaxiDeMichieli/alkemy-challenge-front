@@ -4,8 +4,9 @@ import { Container, Card, Typography, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ResetPasswordForm from '../components/ResetPasswordForm';
 import { useParams } from 'react-router-dom';
-import axios from '../axios/axios';
+import { useHttp } from '../hooks/useHttp';
 import qs from 'querystring';
+import _ from 'lodash';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,9 +40,12 @@ function ResetPassword() {
 
   const [form, setForm] = useState(<Card className={classes.card}><ResetPasswordForm resetLink={resetLink} /></Card>)
 
-  useEffect(() => {
-    let api = axios();
-    api.post('/users/reset-password/check-token', qs.stringify({resetLink: resetLink}))
+  const [http] = useHttp();
+
+  const debounce = _.debounce((callback) => callback(), 100);
+
+  const sendData = () => {
+    http.post('/users/reset-password/check-token', qs.stringify({ resetLink: resetLink }))
       .then(({ data }) => {
         if (data.error != null) {
           setTitle(<Typography variant="h3" align="center" color="secondary">
@@ -60,7 +64,11 @@ function ResetPassword() {
         </Typography>)
         setForm(undefined)
       })
-  }, [resetLink, classes])
+  }
+
+  useEffect(() => {
+    debounce(sendData)
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className={classes.root}>

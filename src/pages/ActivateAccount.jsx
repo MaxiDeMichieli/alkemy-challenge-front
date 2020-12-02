@@ -4,7 +4,7 @@ import { Grid, Container, Typography, Button, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import homeImg from '../images/homeImage.svg';
 import { Link, useParams } from 'react-router-dom';
-import axios from '../axios/axios';
+import { useHttp } from '../hooks/useHttp';
 import qs from 'querystring';
 
 const useStyles = makeStyles((theme) => ({
@@ -34,11 +34,12 @@ function ActivateAccount() {
 
 
   const [message, setMessage] = useState('')
-  const [button, setButton] = useState()
+  const [button, setButton] = useState();
+
+  const [http] = useHttp();
 
   useEffect(() => {
-    let api = axios();
-    api.post('/users/email-activate', qs.stringify({token: token}))
+    http.post('/users/email-activate', qs.stringify({token: token}))
       .then(({ data }) => {
         if (data.error != null) {
           setMessage('No pudimos activar tu cuenta, intenta registrate nuevamente')
@@ -64,7 +65,7 @@ function ActivateAccount() {
           </Link>
         </Box>)
       })
-  }, [])
+  }, [token, classes]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Fragment>

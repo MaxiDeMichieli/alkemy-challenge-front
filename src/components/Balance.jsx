@@ -5,7 +5,7 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import MyListItem from './OperationItem';
 import OperationList from './OperationsList';
-import axios from '../axios/axios';
+import { useHttp } from '../hooks/useHttp';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -19,9 +19,10 @@ function Balance() {
 
   const [balance, setBalance] = useState({})
 
+  const [http] = useHttp();
+
   const getBalance = () =>{
-    let api = axios();
-    api.get('/operations/balance')
+    http.get('/operations/balance')
       .then(({ data }) => {
         if (data.error == null) {
           setBalance(data)
@@ -34,7 +35,7 @@ function Balance() {
 
   useEffect(() => {
     getBalance()
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Container>
