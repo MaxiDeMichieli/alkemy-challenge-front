@@ -44,10 +44,10 @@ function Header(props) {
     signBtns = <Fragment>
       <Link to="/signin">
         <Box mr={1}>
-          <Button color="inherit" href="/alkemy-challenge-front/signin">Sign in</Button>
+          <Button color="inherit" href="/signin">Sign in</Button>
         </Box>
       </Link>
-      <Link to="/alkemy-challenge-front/signup">
+      <Link to="/signup">
         <Box>
           <Button color="inherit" variant="outlined">Sign up</Button>
         </Box>
@@ -61,7 +61,7 @@ function Header(props) {
         <Toolbar>
           {menu}
           <div className={classes.logo}>
-            <Link to="/alkemy-challenge-front/">
+            <Link to="/">
               <img src={logo} alt="logo-alk" />
             </Link>
           </div>

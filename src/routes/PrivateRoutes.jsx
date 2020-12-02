@@ -7,7 +7,7 @@ function PrivateRoutes(props) {
   
   useEffect(() => {
     let component = props.component;
-    let redirect = <Redirect to="/alkemy-challenge-front/signin" />
+    let redirect = <Redirect to="/signin" />
 
     auth
     .then(res => {

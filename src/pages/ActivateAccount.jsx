@@ -44,14 +44,14 @@ function ActivateAccount() {
         if (data.error != null) {
           setMessage('No pudimos activar tu cuenta, intenta registrate nuevamente')
           setButton(<Box mt={3} className={classes.btnContainer} >
-            <Link to="/alkemy-challenge-front/signup">
+            <Link to="/signup">
               <Button variant="contained" color="secondary" >Registrate</Button>
             </Link>
           </Box>)
         } else {
           setMessage('Tu cuenta se verificó correctamente! Ya podes iniciar sesión')
           setButton(<Box mt={3} className={classes.btnContainer} >
-            <Link to="/alkemy-challenge-front/signin">
+            <Link to="/signin">
               <Button variant="contained" color="secondary" >Inicia sesión!</Button>
             </Link>
           </Box>)
@@ -60,7 +60,7 @@ function ActivateAccount() {
       .catch(err => {
         setMessage('No pudimos activar tu cuenta, intenta registrate nuevamente')
         setButton(<Box mt={3} className={classes.btnContainer} >
-          <Link to="/alkemy-challenge-front/signup">
+          <Link to="/signup">
             <Button variant="contained" color="secondary" >Registrate</Button>
           </Link>
         </Box>)

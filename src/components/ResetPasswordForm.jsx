@@ -35,7 +35,7 @@ function ResetPasswordForm(props) {
         if (data.error != null) {
           window.location.reload()
         } else {
-          setRedirect(<Redirect to="/alkemy-challenge-front/signin" />)
+          setRedirect(<Redirect to="/signin" />)
         }
       })
       .catch(err => {

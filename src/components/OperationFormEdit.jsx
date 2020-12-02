@@ -42,7 +42,7 @@ function OperationFormEdit() {
         if (data.error != null) {
           window.location.reload()
         } else {
-          setRedirect(<Redirect to="/alkemy-challenge-front/dashboard" />)
+          setRedirect(<Redirect to="/dashboard" />)
         }
       })
       .catch(err => {

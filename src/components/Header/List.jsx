@@ -12,39 +12,39 @@ const MyList = () => {
     <div>
       <List component="nav" aria-label="cicle">
         <MyListItem
-          link="/alkemy-challenge-front/dashboard"
+          link="/dashboard"
           text="Bienvenidx!"
         >
           <AccountCircleIcon />
         </MyListItem>
         <Divider />
         <MyListItem
-          link="/alkemy-challenge-front/dashboard"
+          link="/dashboard"
           text="Dashboard"
         >
           <DashboardIcon />
         </MyListItem>
         <MyListItem
-          link="/alkemy-challenge-front/income"
+          link="/income"
           text="Ingresos"
         >
           <AttachMoneyRoundedIcon />
         </MyListItem>
         <MyListItem
-          link="/alkemy-challenge-front/expenses"
+          link="/expenses"
           text="Egresos"
         >
           <MoneyOffRoundedIcon />
         </MyListItem>
         <MyListItem
-          link="/alkemy-challenge-front/new-operation"
+          link="/new-operation"
           text="Nueva operación"
         >
           <AddCircleOutlineRoundedIcon />
         </MyListItem>
         <Divider />
         <MyListItem
-          link="/alkemy-challenge-front/logout"
+          link="/logout"
           text="Cerrar sesión"
         >
           <ExitToAppIcon />
