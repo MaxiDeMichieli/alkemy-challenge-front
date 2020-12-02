@@ -33,7 +33,7 @@ function Operations(props) {
         <Container className={classes.content}>
           <Grid container spacing={3} justify="center" alignItems="center" >
             <Grid item xs={12} >
-              <OperationsList title={props.title} />
+              <OperationsList title={props.title} url={props.url} />
             </Grid>
           </Grid>
         </Container>

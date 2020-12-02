@@ -21,7 +21,7 @@ const MyListItem = (props) => {
           <EditIcon />
         </Link>
       </IconButton>
-      <IconButton edge="end" aria-label="delete">
+      <IconButton edge="end" aria-label="delete" onClick={props.delete}>
         <DeleteIcon />
       </IconButton>
     </Fragment>

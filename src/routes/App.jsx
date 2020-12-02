@@ -27,10 +27,10 @@ function App() {
             <PrivateRoutes component={<Edit />} />
           </Route>
           <Route path="/income" exact>
-            <PrivateRoutes component={<Operations title={'Últimos ingresos'} />} />
+            <PrivateRoutes component={<Operations title={'Últimos ingresos'} url="/operations/list?limit=50&offset=0&type=ingreso" />} />
           </Route>
           <Route path="/expenses" exact>
-            <PrivateRoutes component={<Operations title={'Últimos egresos'} />} />
+            <PrivateRoutes component={<Operations title={'Últimos egresos'} url="/operations/list?limit=50&offset=0&type=egreso" />} />
           </Route>
           <Route path="/dashboard" exact>
             <PrivateRoutes component={<Dashboard />} />

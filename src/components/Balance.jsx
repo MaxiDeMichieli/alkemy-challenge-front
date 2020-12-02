@@ -19,7 +19,7 @@ function Balance() {
 
   const [balance, setBalance] = useState({})
 
-  useEffect(() => {
+  const getBalance = () =>{
     let api = axios();
     api.get('/operations/balance')
       .then(({ data }) => {
@@ -30,6 +30,10 @@ function Balance() {
       .catch(err => {
         console.log(err)
       })
+  }
+
+  useEffect(() => {
+    getBalance()
   }, [])
 
   return (
@@ -45,7 +49,7 @@ function Balance() {
               }
               secondaryText={
                 <Typography color="textSecondary" variant="h6" >
-                  $ {balance.balance}
+                  $ {balance.balance || 0}
                 </Typography>
               }
             />
@@ -53,12 +57,12 @@ function Balance() {
             <MyListItem
               text={
                 <Typography color="textSecondary" variant="subtitle1" >
-                  Ingresos: {balance.incomes}
+                  Ingresos: {balance.incomes || 0}
                 </Typography>
               }
               secondaryText={
                 <Typography color="textSecondary" variant="h6" >
-                  <ArrowDropUpIcon /> ${balance.incomesBalance}
+                  <ArrowDropUpIcon /> ${balance.incomesBalance || 0}
                 </Typography>
               }
             />
@@ -66,19 +70,19 @@ function Balance() {
             <MyListItem
               text={
                 <Typography color="textSecondary" variant="subtitle1" >
-                  Egresos: {balance.expenses}
+                  Egresos: {balance.expenses || 0}
                 </Typography>
               }
               secondaryText={
                 <Typography color="textSecondary" variant="h6" >
-                  <ArrowDropDownIcon /> ${balance.expensesBalance}
+                  <ArrowDropDownIcon /> ${balance.expensesBalance || 0}
                 </Typography>
               }
             />
           </Card>
         </Grid>
         <Grid item xs={12} sm={8} >
-          <OperationList url="/operations/list?limit=10&offset=0" />
+          <OperationList url="/operations/list?limit=10&offset=0" refreshBalance={getBalance} />
         </Grid>
       </Grid>
     </Container>
