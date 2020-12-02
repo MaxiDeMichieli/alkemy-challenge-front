@@ -48,7 +48,7 @@ function Home() {
                 Controla tus ingresos y egresos de dinero!
               </Typography>
               <Box mt={3} className={classes.btnContainer} >
-                <Link to="/signup">
+                <Link to="/alkemy-challenge-front/signup">
                   <Button variant="contained" color="secondary" >Comienza ahora!</Button>
                 </Link>
               </Box>

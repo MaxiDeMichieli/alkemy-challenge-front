@@ -5,7 +5,7 @@ function Logout() {
   sessionStorage.clear();
 
   return (
-    <Redirect to="/" />
+    <Redirect to="/alkemy-challenge-front/" />
   )
 }
 

@@ -32,7 +32,7 @@ const Signin = () => {
           window.location.reload()
         } else {
           localStorage.setItem('auth', data.token)
-          setRedirect(<Redirect to="/dashboard" />)
+          setRedirect(<Redirect to="/alkemy-challenge-front/dashboard" />)
         }
       })
       .catch(err => {

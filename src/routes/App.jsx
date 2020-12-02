@@ -20,43 +20,43 @@ function App() {
     <Router>
       <ThemeProvider theme={theme}>
         <Switch>
-          <Route path="/authentication/activate/:token" >
+          <Route path="/alkemy-challenge-front/authentication/activate/:token" >
             <ActivateAccount />
           </Route>
-          <Route path="/edit/:id" exact>
+          <Route path="/alkemy-challenge-front/edit/:id" exact>
             <PrivateRoutes component={<Edit />} />
           </Route>
-          <Route path="/income" exact>
+          <Route path="/alkemy-challenge-front/income" exact>
             <PrivateRoutes component={<Operations title={'Últimos ingresos'} url="/operations/list?limit=50&offset=0&type=ingreso" />} />
           </Route>
-          <Route path="/expenses" exact>
+          <Route path="/alkemy-challenge-front/expenses" exact>
             <PrivateRoutes component={<Operations title={'Últimos egresos'} url="/operations/list?limit=50&offset=0&type=egreso" />} />
           </Route>
-          <Route path="/dashboard" exact>
+          <Route path="/alkemy-challenge-front/dashboard" exact>
             <PrivateRoutes component={<Dashboard />} />
           </Route>
-          <Route path="/new-operation" exact>
+          <Route path="/alkemy-challenge-front/new-operation" exact>
             <PrivateRoutes component={<NewOperation />} />
           </Route>
-          <Route path="/logout" exact>
+          <Route path="/alkemy-challenge-front/logout" exact>
             <PrivateRoutes component={<Logout />} />
           </Route>
-          <Route path="/forgotpassword" exact>
+          <Route path="/alkemy-challenge-front/forgotpassword" exact>
             <PublicRoutes component={<ForgotPassword />} />
           </Route>
-          <Route path="/resetpassword/:resetLink" exact>
+          <Route path="/alkemy-challenge-front/resetpassword/:resetLink" exact>
             <PublicRoutes component={<ResetPassword />} />
           </Route>
-          <Route path="/signin" exact>
+          <Route path="/alkemy-challenge-front/signin" exact>
             <PublicRoutes component={<Sign type={0} />} />
           </Route>
-          <Route path="/signup" exact>
+          <Route path="/alkemy-challenge-front/signup" exact>
             <PublicRoutes component={<Sign type={1} />} />
           </Route>
-          <Route path="/" exact>
+          <Route path="/alkemy-challenge-front/" exact>
             <PublicRoutes component={<Home />} />
           </Route>
-          <Route path="/*" >
+          <Route path="/alkemy-challenge-front/*" >
             <PublicRoutes component={<Redirect to="/" />} />
           </Route>
         </Switch>

@@ -3,7 +3,7 @@ import axios from 'axios';
 export const useHttp = (token) => {
   let localToken = localStorage.getItem('auth');
   let config;
-  const url = 'http://localhost:3001/api'
+  const url = 'https://alkemy-challenge-api.herokuapp.com/api'
   if (token || localToken) {
     config = {
       baseURL: url,
