@@ -178,7 +178,7 @@ const Signup = () => {
                     disabled={isSubmitting}
                     onClick={submitForm}
                   >
-                    iniciar sesión
+                    registrarme
                 </Button>
                 </Box>
               </Grid>
