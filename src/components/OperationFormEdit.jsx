@@ -21,19 +21,30 @@ const useStyles = makeStyles(theme => ({
 function OperationFormEdit() {
   const classes = useStyles();
 
-  const {id} = useParams();
-
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
-
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
-
-  const [redirect, setRedirect] = useState(<Fragment />)
+  const { id } = useParams();
 
   const debounce = _.debounce((a, b, callback) => callback(a, b), 100);
 
   const [http] = useHttp();
+
+  const [redirect, setRedirect] = useState(<Fragment />)
+
+  const [toEdit, setToEdit] = useState()
+
+  http.get(`/operations/list/${id}`)
+    .then(({ data }) => {
+      if (data.error == null) {
+        setToEdit(data.operation)
+      } else {
+        setRedirect(<Redirect to="/dashboard" />)
+      }
+    })
+
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
 
   const sendData = (values, callback) => {
     http.patch(`/operations/edit/${id}`, qs.stringify(values))
@@ -52,21 +63,22 @@ function OperationFormEdit() {
   }
 
 
+
   return (
     <Fragment>
       {redirect}
-      <Formik
+      { toEdit && <Formik
         initialValues={{
-          concept: '',
-          amount: '',
-          date: '',
+          concept: toEdit.concept,
+          amount: toEdit.amount,
+          date: format(new Date(toEdit.date), 'yyyy MM d'),
         }}
         validate={values => {
           const errors = {};
           if (!values.concept) {
             errors.concept = 'Debes ingresar un concepto';
           }
-      
+
           if (!values.amount) {
             errors.amount = 'Debes ingresar un monto';
           } else {
@@ -81,12 +93,12 @@ function OperationFormEdit() {
               errors.amount = 'El monto debe contener solo números'
             }
           }
-      
-          values.date = format(selectedDate, 'yyyy MM d');
+
+          values.date = format(selectedDate, 'MM dd yyyy');
           if (values.date === "Invalid Date") {
             errors.date = 'Fecha inválida';
           }
-      
+
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
@@ -145,13 +157,13 @@ function OperationFormEdit() {
                     onClick={submitForm}
                   >
                     guardar operación
-                </Button>
+                  </Button>
                 </Box>
               </Grid>
             </Grid>
           </Form>
         )}
-      </Formik>
+      </Formik>}
     </Fragment>
   );
 }
