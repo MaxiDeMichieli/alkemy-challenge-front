@@ -70,7 +70,7 @@ function OperationFormEdit() {
       { toEdit && <Formik
         initialValues={{
           concept: toEdit.concept,
-          amount: toEdit.amount,
+          amount: toEdit.amount.toString(),
           date: format(new Date(toEdit.date), 'yyyy MM d'),
         }}
         validate={values => {
